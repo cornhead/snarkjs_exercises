@@ -12,8 +12,25 @@ jobs:
       # required for accessing files in repository.
 
       - name: Export Part I
-        run: bash ${PWD}/export.sh 1
-      - name: Export Part II
-        run: bash ${PWD}/export.sh 2
-      - name: Export Part III
-        run: bash ${PWD}/export.sh 3
+        run: bash export.sh 1
+      - name: 'Upload Artifact Part I'
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'SnarkJS Exercises Part I'
+          path: snarkjs_part_1.zip
+
+      - name: Export Part I
+        run: bash export.sh 2
+      - name: 'Upload Artifact Part II'
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'SnarkJS Exercises Part II'
+          path: snarkjs_part_2.zip
+
+      - name: Export Part I
+        run: bash export.sh 3
+      - name: 'Upload Artifact Part III'
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'SnarkJS Exercises Part III'
+          path: snarkjs_part_3.zip
