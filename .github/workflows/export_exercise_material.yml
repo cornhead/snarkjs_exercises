@@ -1,0 +1,63 @@
+name: Export Exercise Material
+run-name: ${{ github.actor }} is exporting SnarkJS exercises 🚀
+on:
+  workflow_dispatch:
+  push:
+     branches:
+       - master
+
+jobs:
+  export-exercise-material-part-1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      # required for accessing files in repository.
+      
+      - name: Create Folder Structure
+        run: |
+          mkdir snarkjs_part_1
+          mkdir snarkjs_part_1/mycircuits
+          mkdir snarkjs_part_1/mycircuits_solutions
+      
+      - name: Compile Readme (Pandoc)
+        uses: docker://pandoc/core:3.5
+        with:
+          args: >- # allows you to break string into multiple lines
+            --include-in-header=./styling.css
+            -s
+            -f
+            markdown+smart
+            --metadata
+            pagetitle="SnarkJS Part I"
+            --to=html5
+            readmes/README_1.md
+            -o README.html
+
+      - name: Copying files to folder
+        run: |
+          cp compose.yml ./snarkjs_part_1/
+          cp Dockerfile ./snarkjs_part_1/
+          cp snarkjs.1.1.0.dockerimage ./snarkjs_part_1/
+
+      - name: Parsing Circom Files, Assignments
+        run: |
+          cat ./mycircuits/tiny_multiplication.circom | ./solution_parser.py exercises > ./snarkjs_part_1/mycircuits/tiny_multiplication.circom
+          cat ./mycircuits/isEqual.circom | ./solution_parser.py exercises > ./snarkjs_part_1/mycircuits/isEqual.circom
+          cat ./mycircuits/isBinary.circom | ./solution_parser.py exercises > ./snarkjs_part_1/mycircuits/isBinary.circom
+          cat ./mycircuits/isBinaryRepr.circom | ./solution_parser.py exercises > ./snarkjs_part_1/mycircuits/isBinaryRepr.circom
+
+      - name: Parsing Circom Files, Solutions
+        run: |
+          cat ./mycircuits/tiny_multiplication.circom | ./solution_parser.py solutions > ./snarkjs_part_1/mycircuits_solutions/tiny_multiplication.circom
+          cat ./mycircuits/isEqual.circom | ./solution_parser.py solutions > ./snarkjs_part_1/mycircuits_solutions/isEqual.circom
+          cat ./mycircuits/isBinary.circom | ./solution_parser.py solutions > ./snarkjs_part_1/mycircuits_solutions/isBinary.circom
+          cat ./mycircuits/isBinaryRepr.circom | ./solution_parser.py solutions > ./snarkjs_part_1/mycircuits_solutions/isBinaryRepr.circom
+
+      - name: Zipping
+        run: zip -r snarkjs_part_1.zip ./snarkjs_part_1/ 
+
+      - name: Export Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: snarkjs_part_1.zip
+          path: snarkjs_part_1.zip

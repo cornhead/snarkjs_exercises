@@ -1,0 +1,7 @@
+**.html
+**.dockerimage
+**.zip
+**.ptau
+
+mycircuit/**_js/
+mycircuit/**_cpp/
