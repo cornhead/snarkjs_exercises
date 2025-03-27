@@ -1,5 +1,5 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Run Export Script
+run-name: ${{ github.actor }} is exporting SnarkJS exercises 🚀
 on:
   workflow_dispatch:
   push:
