@@ -1,0 +1,10 @@
+services:
+  snarkjs:
+    image: snarkjs:1.1.0
+    build: .
+    volumes:
+      - type: bind
+        source: ./mycircuits
+        target: /mycircuits
+    stdin_open: true
+    tty: true
