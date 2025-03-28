@@ -4,93 +4,11 @@ on:
   workflow_dispatch:
   push:
      branches:
-       - master
+       - main
 
 jobs:
   export-exercise-material-part-1:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      # required for accessing files in repository.
-      
-      - name: Create Folder Structure
-        run: |
-          mkdir snarkjs_part_1
-          mkdir snarkjs_part_1/mycircuits
-          mkdir snarkjs_part_1/mycircuits_solutions
-      
-      - name: Compile Readme (Pandoc)
-        uses: ./.github/workflows/pandoc-md-to-html.yml 
-        with:
-          title: "SnarkJS Part I"
-          source: readmes/README_1.md
-          target: snarkjs_part_1/README.html
-
-      - name: Copying files to folder
-        run: cp compose.yml ./snarkjs_part_1/
-
-      - name: Parsing Circom Files, Assignments
-        run: |
-          cat ./mycircuits/tiny_multiplication.circom | ./solution_parser.py exercises > ./snarkjs_part_1/mycircuits/tiny_multiplication.circom
-          cat ./mycircuits/isEqual.circom | ./solution_parser.py exercises > ./snarkjs_part_1/mycircuits/isEqual.circom
-          cat ./mycircuits/isBinary.circom | ./solution_parser.py exercises > ./snarkjs_part_1/mycircuits/isBinary.circom
-          cat ./mycircuits/isBinaryRepr.circom | ./solution_parser.py exercises > ./snarkjs_part_1/mycircuits/isBinaryRepr.circom
-
-      - name: Parsing Circom Files, Solutions
-        run: |
-          cat ./mycircuits/tiny_multiplication.circom | ./solution_parser.py solutions > ./snarkjs_part_1/mycircuits_solutions/tiny_multiplication.circom
-          cat ./mycircuits/isEqual.circom | ./solution_parser.py solutions > ./snarkjs_part_1/mycircuits_solutions/isEqual.circom
-          cat ./mycircuits/isBinary.circom | ./solution_parser.py solutions > ./snarkjs_part_1/mycircuits_solutions/isBinary.circom
-          cat ./mycircuits/isBinaryRepr.circom | ./solution_parser.py solutions > ./snarkjs_part_1/mycircuits_solutions/isBinaryRepr.circom
-
-      - name: Zipping
-        run: zip -r snarkjs_part_1.zip ./snarkjs_part_1/ 
-
-      - name: Export Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: snarkjs_part_1.zip
-          path: snarkjs_part_1.zip
-
-
-
+    uses: ./.github/workflows/export_exercise_aterial_part_1.yml
 
   export-exercise-material-part-2:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      # required for accessing files in repository.
-      
-      - name: Create Folder Structure
-        run: |
-          mkdir snarkjs_part_2
-          mkdir snarkjs_part_2/mycircuits
-          mkdir snarkjs_part_2/mycircuits_solutions
-      
-      - name: Compile Readme (Pandoc)
-        uses: ./.github/workflows/pandoc-md-to-html.yml 
-        with:
-          title: "SnarkJS Part II"
-          source: readmes/README_2.md
-          target: snarkjs_part_2/README.html
-
-      - name: Copying files to folder
-        run: cp -r mycircuits/circolib ./snarkjs_part_2/mycircuits
-
-      - name: Parsing Circom Files, Assignments
-        run: |
-          cat ./mycircuits/mastermind.circom | ./solution_parser.py exercises > ./snarkjs_part_2/mycircuits/mastermind.circom
-
-      - name: Parsing Circom Files, Solutions
-        run: |
-          cat ./mycircuits/mastermind.circom | ./solution_parser.py solutions iterative > ./snarkjs_part_2/mycircuits_solutions/mastermind_solutions_iterative.circom
-          cat ./mycircuits/mastermind.circom | ./solution_parser.py solutions recursive > ./snarkjs_part_2/mycircuits_solutions/mastermind_solutions_recursive.circom
-
-      - name: Zipping
-        run: zip -r snarkjs_part_2.zip ./snarkjs_part_2/ 
-
-      - name: Export Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: snarkjs_part_2.zip
-          path: snarkjs_part_2.zip
+    uses: ./.github/workflows/export_exercise_aterial_part_2.yml
