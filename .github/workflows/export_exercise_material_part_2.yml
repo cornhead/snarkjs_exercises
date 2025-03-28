@@ -23,7 +23,7 @@ jobs:
           target: snarkjs_part_2/README.html
 
       - name: Copying files to folder
-        run: cp -r mycircuits/circolib ./snarkjs_part_2/mycircuits
+        run: cp -r mycircuits/circomlib ./snarkjs_part_2/mycircuits
 
       - name: Parsing Circom Files, Assignments
         run: |
