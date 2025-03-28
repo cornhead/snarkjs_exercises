@@ -1,0 +1,3 @@
+[submodule "mycircuits/circomlib"]
+	path = mycircuits/circomlib
+	url = https://github.com/iden3/circomlib
