@@ -1,0 +1,40 @@
+name: Export Exercise Material Part 3
+on:
+  workflow_call:
+
+jobs:
+  export-exercise-material-part-2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      # required for accessing files in repository.
+      
+      - name: Create Folder Structure
+        run: |
+          mkdir snarkjs_part_3
+          mkdir snarkjs_part_3/mastermind_app
+      
+      - name: Compile Readme (Pandoc)
+        uses: ./.github/actions/pandoc-md-to-html
+        with:
+          title: "SnarkJS Part III"
+          source: readmes/README_3.md
+          target: snarkjs_part_3/README.html
+
+      - name: Copying files to folder
+        run: cp  ./mastermind_app/package.json ./snarkjs_part_3/mastermind_app/
+
+      - name: Parsing Circom Files, Assignments
+        run: cat ./mastermind_app/index.js | ./solution_parser.py exercises > ./snarkjs_part_3/mastermind_app/index.js
+
+      - name: Parsing Circom Files, Solutions
+        run: cat ./mastermind_app/index.js | ./solution_parser.py solutions > ./snarkjs_part_3/mastermind_app/index_solutions.js
+
+      - name: Zipping
+        run: zip -r snarkjs_part_3.zip ./snarkjs_part_3/ 
+
+      - name: Export Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: snarkjs_part_3.zip
+          path: snarkjs_part_3.zip

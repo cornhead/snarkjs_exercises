@@ -14,3 +14,6 @@ jobs:
 
   export-exercise-material-part-2:
     uses: ./.github/workflows/export_exercise_material_part_2.yml
+
+  export-exercise-material-part-3:
+    uses: ./.github/workflows/export_exercise_material_part_3.yml
