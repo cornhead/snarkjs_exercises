@@ -1,0 +1,30 @@
+on:
+  workflow_call:
+    inputs:
+      source:
+        required: true
+        type: string
+      target:
+        required: true
+        type: string
+      title:
+        required: true
+        type: string
+        
+jobs:
+  pandoc-md-to-html:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compile Pandoc from MD to HTML
+        uses: docker://pandoc/core:3.5
+        with:
+          args: >- # allows you to break string into multiple lines
+            --include-in-header=./styling.css
+            -s
+            -f
+            markdown+smart
+            --metadata
+            pagetitle=${{inputs.title}}
+            --to=html5
+            ${{inputs.source}}
+            -o ${{inputs.target}}

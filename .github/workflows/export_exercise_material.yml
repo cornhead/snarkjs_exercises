@@ -20,18 +20,11 @@ jobs:
           mkdir snarkjs_part_1/mycircuits_solutions
       
       - name: Compile Readme (Pandoc)
-        uses: docker://pandoc/core:3.5
+        uses: ./.github/workflows/pandoc-md-to-html.yml 
         with:
-          args: >- # allows you to break string into multiple lines
-            --include-in-header=./styling.css
-            -s
-            -f
-            markdown+smart
-            --metadata
-            pagetitle="SnarkJS Part I"
-            --to=html5
-            readmes/README_1.md
-            -o snarkjs_part_1/README.html
+          title: "SnarkJS Part I"
+          source: readmes/README_1.md
+          target: snarkjs_part_1/README.html
 
       - name: Copying files to folder
         run: cp compose.yml ./snarkjs_part_1/
@@ -75,18 +68,11 @@ jobs:
           mkdir snarkjs_part_2/mycircuits_solutions
       
       - name: Compile Readme (Pandoc)
-        uses: docker://pandoc/core:3.5
+        uses: ./.github/workflows/pandoc-md-to-html.yml 
         with:
-          args: >- # allows you to break string into multiple lines
-            --include-in-header=./styling.css
-            -s
-            -f
-            markdown+smart
-            --metadata
-            pagetitle="SnarkJS Part II"
-            --to=html5
-            readmes/README_2.md
-            -o snarkjs_parts_2/README.html
+          title: "SnarkJS Part II"
+          source: readmes/README_2.md
+          target: snarkjs_part_2/README.html
 
       - name: Copying files to folder
         run: cp -r mycircuits/circolib ./snarkjs_part_2/mycircuits
