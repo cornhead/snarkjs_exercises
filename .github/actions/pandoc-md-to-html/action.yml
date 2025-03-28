@@ -23,7 +23,7 @@ runs:
           -f
           markdown+smart
           --metadata
-          pagetitle='${{inputs.title}}'
+          "pagetitle=${{inputs.title}}"
           --to=html5
           ${{inputs.source}}
           -o ${{inputs.target}}
