@@ -31,7 +31,7 @@ jobs:
             pagetitle="SnarkJS Part I"
             --to=html5
             readmes/README_1.md
-            -o README.html
+            -o snarkjs_part_1/README.html
 
       - name: Copying files to folder
         run: cp compose.yml ./snarkjs_part_1/
@@ -58,3 +58,53 @@ jobs:
         with:
           name: snarkjs_part_1.zip
           path: snarkjs_part_1.zip
+
+
+
+
+  export-exercise-material-part-2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      # required for accessing files in repository.
+      
+      - name: Create Folder Structure
+        run: |
+          mkdir snarkjs_part_2
+          mkdir snarkjs_part_2/mycircuits
+          mkdir snarkjs_part_2/mycircuits_solutions
+      
+      - name: Compile Readme (Pandoc)
+        uses: docker://pandoc/core:3.5
+        with:
+          args: >- # allows you to break string into multiple lines
+            --include-in-header=./styling.css
+            -s
+            -f
+            markdown+smart
+            --metadata
+            pagetitle="SnarkJS Part II"
+            --to=html5
+            readmes/README_2.md
+            -o snarkjs_parts_2/README.html
+
+      - name: Copying files to folder
+        run: cp -r mycircuits/circolib ./snarkjs_part_2/mycircuits
+
+      - name: Parsing Circom Files, Assignments
+        run: |
+          cat ./mycircuits/mastermind.circom | ./solution_parser.py exercises > ./snarkjs_part_2/mycircuits/mastermind.circom
+
+      - name: Parsing Circom Files, Solutions
+        run: |
+          cat ./mycircuits/mastermind.circom | ./solution_parser.py solutions iterative > ./snarkjs_part_2/mycircuits_solutions/mastermind_solutions_iterative.circom
+          cat ./mycircuits/mastermind.circom | ./solution_parser.py solutions recursive > ./snarkjs_part_2/mycircuits_solutions/mastermind_solutions_recursive.circom
+
+      - name: Zipping
+        run: zip -r snarkjs_part_2.zip ./snarkjs_part_2/ 
+
+      - name: Export Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: snarkjs_part_2.zip
+          path: snarkjs_part_2.zip
