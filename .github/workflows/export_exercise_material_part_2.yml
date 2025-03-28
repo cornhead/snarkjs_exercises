@@ -16,7 +16,7 @@ jobs:
           mkdir snarkjs_part_2/mycircuits_solutions
       
       - name: Compile Readme (Pandoc)
-        uses: ./.github/actions/pandoc-md-to-html/action.yml 
+        uses: ./.github/actions/pandoc-md-to-html
         with:
           title: "SnarkJS Part II"
           source: readmes/README_2.md
