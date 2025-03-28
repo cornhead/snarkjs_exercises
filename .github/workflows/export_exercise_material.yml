@@ -8,7 +8,7 @@ on:
 
 jobs:
   export-exercise-material-part-1:
-    uses: ./.github/workflows/export_exercise_aterial_part_1.yml
+    uses: ./.github/workflows/export_exercise_material_part_1.yml
 
   export-exercise-material-part-2:
-    uses: ./.github/workflows/export_exercise_aterial_part_2.yml
+    uses: ./.github/workflows/export_exercise_material_part_2.yml
