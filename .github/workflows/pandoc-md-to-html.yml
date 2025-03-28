@@ -15,6 +15,9 @@ jobs:
   pandoc-md-to-html:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      # required for accessing files in repository.
+
       - name: Compile Pandoc from MD to HTML
         uses: docker://pandoc/core:3.5
         with:
