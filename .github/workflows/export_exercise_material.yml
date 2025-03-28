@@ -34,9 +34,7 @@ jobs:
             -o README.html
 
       - name: Copying files to folder
-        run: |
-          cp compose.yml ./snarkjs_part_1/
-          cp Dockerfile ./snarkjs_part_1/
+        run: cp compose.yml ./snarkjs_part_1/
 
       - name: Parsing Circom Files, Assignments
         run: |
