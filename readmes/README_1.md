@@ -119,4 +119,4 @@ If you must reclaim disk space, follow these steps:
 
 **Have fun playing around with snarkJS! :D**
 
-Author: Konrad Klier, Oct 2024
+Author: cornhead, Oct 2024

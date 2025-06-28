@@ -78,6 +78,6 @@ Sadly, there was only one single student. This is probably because there was a g
 
 The student had to generate a setup first, but still managed to solve the tasks in time.
 
-One idea, which I was not able to implement, was to extend SnarkJS with a simulator for Groth16. This way, we (the teaching team) would be able to always win the game when playing against students and, thus, teach them the importance of the honesty of the setup. If you're interested in finishing the implementation, send me an email: `kklier@student.ethz.ch`.
+One idea, which I was not able to implement, was to extend SnarkJS with a simulator for Groth16. This way, we (the teaching team) would be able to always win the game when playing against students and, thus, teach them the importance of the honesty of the setup. If you're interested in finishing the implementation, send me an email.
 
-Author: Konrad Klier, Oct 2024
+Author: cornhead, Oct 2024
