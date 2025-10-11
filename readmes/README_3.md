@@ -69,4 +69,4 @@ Have fun playing the game! :D
 
 - There is still a workshop and an adjacent CTF going on for a few days. If you want to hack around with ZK proof systems, have a look at this years edition of [ZK Hack](https://zkhack.dev/).
 
-Author: Konrad Klier, Dec 2024
+Author: cornhead, Dec 2024

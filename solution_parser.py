@@ -29,7 +29,7 @@ def usage():
     eprint('solutions of the same task and only one todo statement will be')
     eprint('generated for the `exercises` command.')
     eprint('')
-    eprint('Author: Konrad Klier, Nov 2024')
+    eprint('Author: cornhead, Nov 2024')
 
     sys.exit(1)
 

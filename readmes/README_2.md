@@ -60,4 +60,4 @@ Have fun playing the game!
 - In the first part, the question came up how we validate circuits. Validating circuits is very important but also difficult. In fact, a look at the [ZK Bug Tracker](https://github.com/0xPARC/zk-bug-tracker) shows how many vulnerabilities in ZK proof systems concern the circuit specification.
 - For the commitment scheme, we used the Poseidon hash function. In contrast to more common hash functions like the ones from the SHA family, Poseidon was developed especially with ZK systems in mind, so it is a natural fit for our purpos: [Poseidon: A New Hash Function for Zero-Knowledge Proof Systems](https://eprint.iacr.org/2019/458)
 
-Author: Konrad Klier, Nov 2024
+Author: cornhead, Nov 2024
